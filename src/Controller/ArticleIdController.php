@@ -9,9 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArticleIdController extends AbstractController
 {
-    #[Route('/article/{articleId}', name: 'article')]
+    #[Route('/article/{articleId<\d+>}', name: 'show-article', methods: "GET")]
     
-    public function show($articleId)
+    public function show($articleId = 1)
     {
         // Nous retrouvons la valeur de la variable $articleId à partir de l'URI
         // Par exemple /article/1234 => $articleId = '1234'
