@@ -1,23 +1,9 @@
 <?php
 
-require __DIR__.'/../vendor/autoload.php';
+use App\Kernel;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 
-$request = Request::createFromGlobals();
-$url = $request->getPathInfo();
-$response = new Response();
-
-switch($url) {
-    case '/':
-        $response->setContent('Accueil');
-        break;
-    case '/admin':
-        $response->setContent('Accès Espace Admin');
-        break;
-    default:
-        $response->setStatusCode(Response::HTTP_NOT_FOUND);
-}
-
-$response->send();
+return function (array $context) {
+    return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
+};
